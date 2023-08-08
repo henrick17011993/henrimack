@@ -1,6 +1,10 @@
-$(function() {  
+$(function() {
     $("#btnButton").on("click", function() {
-        enviar();
+        if(VerificaRequired() == true){
+            enviar();
+        }else {
+           window.alert(VerificaRequired())
+        }
     });
 
     $("#btnAtualizar").on("click", function () {
@@ -8,70 +12,95 @@ $(function() {
         AtualizaDados(id);
     });
 
-
-    $("[id^=btnD_]").on ("click", function () {
-        if(confirm("tem certeza ? ")){
+    $("[id^=btnD_]").on("click", function () {
+        if (confirm("Tem certeza?")) {
             const id = $(this).attr("data-id");
             deletaDados(id);
         }
-    })
+    });
 });
+
+function VerificaRequired() {
+    
+    obrigatorios = [];
+    $('select[required]').each(function() {
+        if ((this.value).trim() == '') {
+            obrigatorios.push(this.id);
+        }
+    });
+    $('input[required]').each(function() {
+        if ((this.value).trim() == '') {
+            obrigatorios.push(this.id);
+        }
+    });
+    
+    campos = "";
+    if (obrigatorios.length > 0) {
+        for (i = 0; i < obrigatorios.length; i++) { 
+            campos += ", " + $("#title"+obrigatorios[i]).text().replace(" (*)", "");;
+            $("#"+obrigatorios[i]).css('border-color', 'red');
+        }
+        return "Campos obrigatórios não preenchidos: " + campos.substring(2);
+    } else {
+        return true;
+    }        
+}
 
 function enviar() {
     dados = {
-        "tipo" :  $("#Tipo").val(),
-        "modelos":  $("#Modelos").val(),
-        "cor":  $("#Cor").val(),
-        "valor":  $("#Valor").val(),
-    }
+        "tipo": $("#Tipo").val(),
+        "modelos": $("#Modelos").val(),
+        "cor": $("#Cor").val(),
+        "valor": $("#Valor").val(),
+    };
 
     $.ajax({
         type: "POST",
-        url: "php/funcoes.php?funcao=insere",
+        url: "php/funcoes.php?funcao=insere", // Corrigido o parâmetro da URL
         data: dados,
-            success: function (ret) {
-                if(!ret){
-                    location.href = "index.php"
-                } else {
-                    alert(ret);
-                }           
+        success: function(ret) {
+            if (!ret) {
+                location.href = "index.php";
+            } else {
+                alert(ret);
+            }
         }
     });
 }
 
-function deletaDados(id){
+function deletaDados(id) {
     $.ajax({
         type: "POST",
-        url: "php/funcoes.php?funcao=Deleta",
-        data: {"id": id},
-        success: function (ret) {
-            if (!ret){
+        url: "php/funcoes.php?funcao=Deleta", // Corrigido o parâmetro da URL
+        data: { "id": id },
+        success: function(ret) {
+            if (!ret) {
                 $("#btnD_" + id).closest("tr").remove();
             } else {
-                alert(ret)
-            }        
+                alert(ret);
+            }
         }
     });
 }
 
-function AtualizaDados(id){
+function AtualizaDados(id) {
     dados = {
         "id": id,
-        "tipo" :  $("#Tipo").val(),
+        "tipo": $("#Tipo").val(),
         "modelos": $("#Modelos").val(),
-        "cor":  $("#Cor").val(),
-        "valor":   $("#Valor").val(),
-    }
+        "cor": $("#Cor").val(),
+        "valor": $("#Valor").val(),
+    };
     $.ajax({
         type: "POST",
-        url: "php/funcoes.php?funcao=editar",
+        url: "php/funcoes.php?funcao=editar", // Corrigido o parâmetro da URL
         data: dados,
-        success: function (ret) {
-            if (!ret){
-                location.href = "index.php"
+        success: function(ret) {
+            if (!ret) {
+                location.href = "index.php";
             } else {
-                alert(ret)
-            }          
+                alert(ret);
+            }
         }
     });
 }

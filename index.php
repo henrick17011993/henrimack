@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Henrimack.com</title>
+    <title>E.R.E.com</title>
     <link rel="stylesheet" type="text/css" href="css/main.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="./js/main.js"></script>
@@ -13,7 +13,7 @@
         $arrayResultados = show();
         ?>        
     <header>
-        <h1>Henrimack</h1>
+        <h1>E.R.E</h1>
         <ul>
             <li><a href="produto.php">Cadastro de Produtos</a></li>
             <li><a href="sobrenos.php">Sobre Nós</a></li>
