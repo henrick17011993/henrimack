@@ -2,7 +2,11 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+<<<<<<< HEAD
     <title>E.R.E.com</title>
+=======
+    <title>Henrimack.com</title>
+>>>>>>> 27d3988e75865ef6028949983a861ddc7f28d092
     <link rel="stylesheet" type="text/css" href="css/main.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="./js/main.js"></script>
@@ -13,7 +17,11 @@
         $arrayResultados = show();
         ?>        
     <header>
+<<<<<<< HEAD
         <h1>E.R.E</h1>
+=======
+        <h1>Henrimack</h1>
+>>>>>>> 27d3988e75865ef6028949983a861ddc7f28d092
         <ul>
             <li><a href="produto.php">Cadastro de Produtos</a></li>
             <li><a href="sobrenos.php">Sobre Nós</a></li>
